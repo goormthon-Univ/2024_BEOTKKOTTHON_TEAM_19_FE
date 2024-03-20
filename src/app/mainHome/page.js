@@ -2,6 +2,7 @@
 import GrowComponent from "@component/mainHome/growComponents";
 import classes from "./page.module.css";
 import CreateHabit from "@component/mainHome/createHabit";
+import NavBar from "@component/nav/navBar";
 
 export default function Home() {
   return (
@@ -20,6 +21,7 @@ export default function Home() {
           <CreateHabit />
         </div>
       </div>
+      <NavBar />
     </>
   )
 }
