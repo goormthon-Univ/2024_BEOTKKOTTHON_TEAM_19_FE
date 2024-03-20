@@ -16,6 +16,13 @@
   }
 }
 
+html{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: white;
+}
+
 body {
   color: rgb(var(--foreground-rgb));
   background: linear-gradient(
