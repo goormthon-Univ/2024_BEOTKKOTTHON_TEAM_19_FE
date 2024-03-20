@@ -1,0 +1,15 @@
+.conditionBox {
+  background-color: #EBFAEF;
+  width: 108px;
+  height: 82px;
+}
+
+.conditionText {
+  color: #333333;
+  font-size: 14px;
+}
+
+.conditionNumber {
+  color: #41C364;
+  font-size: 18px;
+}
