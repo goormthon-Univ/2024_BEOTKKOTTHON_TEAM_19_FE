@@ -1,0 +1,25 @@
+.completeText {
+  margin-top: 85px;
+  text-align: center;
+  font-size: 24px;
+  font-weight: 700;
+  line-height: 140%;
+  color: black;
+}
+
+.temporaryBox {
+  width: 150px;
+  height: 150px;
+  margin: 0 auto;
+  margin-top: 200px;
+  background-color: gray;
+}
+
+.supportText {
+  margin-top: 125px;
+  text-align: center;
+  font-size: 24px;
+  font-weight: 700;
+  line-height: 140%;
+  color: black;
+}
