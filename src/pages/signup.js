@@ -1,26 +1,88 @@
-import Link from "next/link";
 import { useState } from "react";
 
 export default function Signup() {
-  const [id, setId] = useState("");
+  const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [passwordCheck, setPasswordCheck] = useState("");
   const [nickname, setNickname] = useState("");
-  const [isDuplicatedId, setIsDuplicatedId] = useState(true);
+  const [isDuplicatedUsername, setIsDuplicatedUsername] = useState(true);
   const [isDuplicatedNickname, setIsDuplicatedNickname] = useState(true);
 
-  const handleDuplicatedId = () => {
-    console.log("아이디 중복 체크");
-    setIsDuplicatedId(false);
+  const handleDuplicatedUsername = async () => {
+    const postData = { username };
+    try {
+      const res = await fetch("http://3.38.103.137:8080/api/check-username", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(postData),
+      });
+      const { status, data } = await res.json();
+      if (status === "fail") {
+        alert(data.username);
+        return;
+      }
+      alert(data);
+      setIsDuplicatedUsername(false);
+    } catch (e) {
+      alert("아이디 중복 확인에 실패하였습니다");
+    }
   };
 
-  const handleDuplicatedNickname = () => {
-    console.log("닉네임 중복 체크");
-    setIsDuplicatedNickname(false);
+  const handleDuplicatedNickname = async () => {
+    const postData = { nickname };
+    try {
+      const res = await fetch("http://3.38.103.137:8080/api/check-nickname", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(postData),
+      });
+      const { status, data } = await res.json();
+      if (status === "fail") {
+        alert(data.nickname);
+        return;
+      }
+      alert(data);
+      setIsDuplicatedNickname(false);
+    } catch (e) {
+      alert("닉네임 중복 확인에 실패하였습니다");
+    }
   };
 
   const checkPassword = () => {
     return password === passwordCheck;
+  };
+
+  const handleSignup = async () => {
+    if (!checkPassword()) {
+      alert("비밀번호를 확인해 주세요");
+      return;
+    }
+    const postData = { username, password, nickname };
+    try {
+      const res = await fetch("http://3.38.103.137:8080/api/signup", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(postData),
+      });
+      const { status, data } = await res.json();
+      if (status === "fail") {
+        alert(data.password);
+        return;
+      }
+      const { accessToken, refreshToken, loginResponseDTO } = data;
+      const { id, username, nickname } = loginResponseDTO;
+      setUserInfo({ accessToken, id, username, nickname });
+      localStorage.setItem("refreshToken", refreshToken);
+      router.push("/signupComplete");
+    } catch (e) {
+      // alert("회원가입에 실패하였습니다");
+    }
   };
 
   return (
@@ -42,12 +104,12 @@ export default function Signup() {
               className="text-[1.6rem] px-[16px] rounded-[6px] w-full h-[53px] border border-[#E5E5E5] placeholder:text-[#999999] placeholder:text-[1.4rem] placeholder:font-[Pretendard-Medium]"
               type="text"
               placeholder="6자~20자까지 가능해요"
-              onChange={(e) => setId(e.target.value)}
+              onChange={(e) => setUsername(e.target.value)}
             />
             <button
               className="font-[Pretendard-Medium] text-[1.4rem] rounded-[6px] w-[118px] h-[53px] disabled:bg-[#E5E5E5] disabled:text-[#999999] bg-[#41C364] text-white"
-              disabled={!id}
-              onClick={handleDuplicatedId}
+              disabled={!username}
+              onClick={handleDuplicatedUsername}
             >
               중복 확인
             </button>
@@ -127,21 +189,19 @@ export default function Signup() {
         </div>
       </div>
 
-      <Link href="/signupComplete">
-        <button
-          className="w-full disabled:bg-[#E5E5E5] disabled:text-[#999999] bg-[#41C364] text-white text-[1.4rem] font-[Pretendard-Bold] h-[53px] rounded-[6px]"
-          disabled={
-            !id.trim() ||
-            !password.trim() ||
-            !nickname.trim() ||
-            isDuplicatedId ||
-            isDuplicatedNickname ||
-            !checkPassword()
-          }
-        >
-          확인
-        </button>
-      </Link>
+      <button
+        className="w-full disabled:bg-[#E5E5E5] disabled:text-[#999999] bg-[#41C364] text-white text-[1.4rem] font-[Pretendard-Bold] h-[53px] rounded-[6px]"
+        onClick={handleSignup}
+        disabled={
+          !username.trim() ||
+          !password.trim() ||
+          !nickname.trim() ||
+          isDuplicatedUsername ||
+          isDuplicatedNickname
+        }
+      >
+        확인
+      </button>
     </div>
   );
 }
