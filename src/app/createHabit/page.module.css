@@ -1,0 +1,14 @@
+.infoText {
+  margin-top: 21px;
+  margin-left: 20px;
+  line-height: 140%;
+  font-size: 24px;
+  font-weight: 700;
+  color: black;
+}
+
+.titleField {
+  width: 80%;
+  margin: 0 auto;
+  display: block;
+}

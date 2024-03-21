@@ -1,0 +1,13 @@
+.createBox {
+  width: 166px;
+  height: 220px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: white;
+
+  @media (max-width: 390px) {
+    width: 150px;
+    height: 190px;
+  }
+}
