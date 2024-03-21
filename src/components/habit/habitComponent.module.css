@@ -1,9 +1,9 @@
-.habitComponent {
+.habitContainer {
   width: 166px;
   height: 220px;
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  /* justify-content: center; */
   align-items: center;
   background-color: white;
 
@@ -11,4 +11,37 @@
     width: 150px;
     height: 190px;
   }
+}
+
+.dayBox {
+  margin-top: 15px;
+  width: 91px;
+  height: 25px;
+  background-color: #41C364;
+  border-radius: 15px;
+  color: white;
+  font-size: 14px;
+  font-weight: 700;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.temporaryBox {
+  width: 100px;
+  height: 90px;
+  background-color: gray;
+  margin-top: 15px;
+}
+
+.habitText {
+  margin-top: 12px;
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.levelText {
+  margin-top: 8px;
+  font-size: 12px;
+  font-weight: 500;
 }

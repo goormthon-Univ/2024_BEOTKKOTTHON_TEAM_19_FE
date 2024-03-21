@@ -4,12 +4,14 @@ import GrowComponent from "../../components/mainHome/growComponents";
 import classes from "./page.module.css";
 import CreateHabitComponent from "../../components/mainHome/createHabitComponent";
 import NavBar from "../../components/nav/navBar";
+import HabitComponent from "../../components/habit/habitComponent";
 import useUserInfo from "../../hooks/useUserInfo";
 import Link from "next/link";
 
 export default function Home() {
   const [count, setCount] = useState(0);
   const [days, setDays] = useState(0);
+  const [habit, setHabit] = useState([]);
   // const [user, setUser] = useState("User");
   const {userInfo} = useUserInfo();
 
@@ -28,7 +30,8 @@ export default function Home() {
       </div>
       <div className={classes.habitBox}>
         <p className={classes.habitText}>습관 목록</p>
-        <div>
+        <div className={classes.habitContainer}>
+          <HabitComponent />
           <Link href="/createHabit"><CreateHabitComponent /></Link>
         </div>
       </div>

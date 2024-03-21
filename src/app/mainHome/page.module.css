@@ -36,6 +36,12 @@
   margin-bottom: 20px;
 }
 
+.habitContainer {
+  display: flex;
+  padding-right: 20px;
+  justify-content: space-between;
+}
+
 .navContainer {
   width: 100%;
 }
