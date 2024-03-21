@@ -11,7 +11,7 @@ export default function Signup() {
   const handleDuplicatedUsername = async () => {
     const postData = { username };
     try {
-      const res = await fetch("http://3.38.103.137:8080/api/check-username", {
+      const res = await fetch("/api/check-username", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -33,7 +33,7 @@ export default function Signup() {
   const handleDuplicatedNickname = async () => {
     const postData = { nickname };
     try {
-      const res = await fetch("http://3.38.103.137:8080/api/check-nickname", {
+      const res = await fetch("/api/check-nickname", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -63,7 +63,7 @@ export default function Signup() {
     }
     const postData = { username, password, nickname };
     try {
-      const res = await fetch("http://3.38.103.137:8080/api/signup", {
+      const res = await fetch("/api/signup", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
