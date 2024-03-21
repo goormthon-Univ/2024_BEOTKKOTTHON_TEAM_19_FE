@@ -2,15 +2,14 @@
 
 const API_KEY = process.env.NEXT_PUBLIC_API_URL;
 
-const runtimeCaching = require("next-pwa/cache");
-const withPWA = require("next-pwa")({
-  runtimeCaching,
-  dest: "public",
-  disable: process.env.NODE_ENV === "development", // 개발 환경에서는 PWA 비활성화
-  register: true,
-  skipWaiting: true,
-  buildExcludes: [/middleware-manifest\.json$/],
-});
+// const runtimeCaching = require("next-pwa/cache");
+// const withPWA = require("next-pwa")({
+//   runtimeCaching,
+//   dest: "public",
+//   disable: process.env.NODE_ENV === "development", // 개발 환경에서는 PWA 비활성화
+//   register: true,
+//   skipWaiting: true,
+// });
 
 const nextConfig = {
   reactStrictMode: true,
@@ -24,4 +23,5 @@ const nextConfig = {
   },
 };
 
-module.exports = withPWA(nextConfig);
+// module.exports = withPWA(nextConfig);
+module.exports = nextConfig;
