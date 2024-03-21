@@ -23,6 +23,7 @@
 .habitBox {
   margin-top: 24px;
   width: 100%;
+  height: 100vh;
   background-color: #EBFAEF;
   padding-left: 20px;
 }

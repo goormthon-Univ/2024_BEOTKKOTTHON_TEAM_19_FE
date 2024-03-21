@@ -8,19 +8,19 @@ export default function NavBar() {
       <div className={classes.imgBox}>
         {/* <Link> */}
           <Image src="/image/Home.png" alt="Home icon" width={18} height={18}/>
-          <p>홈</p>
+          <p className={classes.navText}>홈</p>
         {/* </Link> */}
       </div>
       <div className={classes.imgBox}>
         {/* <Link> */}
-          <Image src="/image/Home.png" alt="Home icon" width={18} height={18}/>
-          <p>둘러보기</p>
+          {/* <Image src="/image/Home.png" alt="Home icon" width={18} height={18}/> */}
+          <p className={classes.navText}>둘러보기</p>
         {/* </Link> */}
       </div>
       <div className={classes.imgBox}>
         {/* <Link> */}
-          <Image src="/image/Home.png" alt="Home icon" width={18} height={18}/>
-          <p>히스토리</p>
+          {/* <Image src="/image/Home.png" alt="Home icon" width={18} height={18}/> */}
+          <p className={classes.navText}>히스토리</p>
         {/* </Link> */}
       </div>
     </div>
