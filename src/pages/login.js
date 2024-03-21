@@ -12,7 +12,7 @@ export default function Login() {
   const handleLogin = async () => {
     const postData = { username, password };
     try {
-      const res = await fetch("http://3.38.103.137:8080/api/login", {
+      const res = await fetch("/api/login", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
