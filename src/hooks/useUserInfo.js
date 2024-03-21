@@ -1,6 +1,6 @@
 import { create } from "zustand";
 
-const defaultState = { accessToken: "", nickname: "" };
+const defaultState = { accessToken: "", id: null, username: "", nickname: "" };
 
 const useUserInfo = create((set) => ({
   userInfo: defaultState,
