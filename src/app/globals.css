@@ -23,7 +23,7 @@ html {
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: black;
+  background-color: rgb(245, 245, 245);
 }
 
 body {
@@ -32,7 +32,7 @@ body {
   min-width: 350px;
   max-width: 450px;
   min-height: 100vh;
-  overflow-x : hidden;
+  overflow-x: hidden;
   margin: 0;
   flex-grow: 1;
   position: relative;

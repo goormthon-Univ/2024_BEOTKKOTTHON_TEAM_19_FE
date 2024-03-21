@@ -10,7 +10,7 @@ export default function SignupComplete() {
       <span className="font-[Pretendard-Bold] text-[2.4rem]">
         앞으로의 습관 형성을 응원합니다!
       </span>
-      <Link className="w-full" href="/home">
+      <Link className="w-full" href="/mainHome">
         <button className="w-full disabled:bg-[#E5E5E5] disabled:text-[#999999] bg-[#41C364] text-white text-[1.4rem] font-[Pretendard-Bold] h-[53px] rounded-[6px]">
           습관 만들러 가기
         </button>

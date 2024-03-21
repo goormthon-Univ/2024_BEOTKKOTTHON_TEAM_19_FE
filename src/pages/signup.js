@@ -6,11 +6,17 @@ export default function Signup() {
   const [password, setPassword] = useState("");
   const [passwordCheck, setPasswordCheck] = useState("");
   const [nickname, setNickname] = useState("");
-  const [isDuplicated, setIsDuplicated] = useState(true);
+  const [isDuplicatedId, setIsDuplicatedId] = useState(true);
+  const [isDuplicatedNickname, setIsDuplicatedNickname] = useState(true);
 
-  const handleDuplicated = () => {
-    console.log("중복 체크");
-    setIsDuplicated(false);
+  const handleDuplicatedId = () => {
+    console.log("아이디 중복 체크");
+    setIsDuplicatedId(false);
+  };
+
+  const handleDuplicatedNickname = () => {
+    console.log("닉네임 중복 체크");
+    setIsDuplicatedNickname(false);
   };
 
   const checkPassword = () => {
@@ -35,13 +41,13 @@ export default function Signup() {
             <input
               className="text-[1.6rem] px-[16px] rounded-[6px] w-full h-[53px] border border-[#E5E5E5] placeholder:text-[#999999] placeholder:text-[1.4rem] placeholder:font-[Pretendard-Medium]"
               type="text"
-              placeholder="아이디 입력"
+              placeholder="6자~20자까지 가능해요"
               onChange={(e) => setId(e.target.value)}
             />
             <button
               className="font-[Pretendard-Medium] text-[1.4rem] rounded-[6px] w-[118px] h-[53px] disabled:bg-[#E5E5E5] disabled:text-[#999999] bg-[#41C364] text-white"
               disabled={!id}
-              onClick={handleDuplicated}
+              onClick={handleDuplicatedId}
             >
               중복 확인
             </button>
@@ -87,12 +93,21 @@ export default function Signup() {
             </span>
           </div>
           <div className="flex flex-col gap-[32px]">
-            <input
-              className="text-[1.6rem] px-[16px] rounded-[6px] w-full h-[53px] border border-[#E5E5E5] placeholder:text-[#999999] placeholder:text-[1.4rem] placeholder:font-[Pretendard-Medium]"
-              type="text"
-              placeholder="닉네임은 공백 포함 최대 8글자까지 가능해요"
-              onChange={(e) => setNickname(e.target.value)}
-            />
+            <div className="flex gap-[12px]">
+              <input
+                className="text-[1.6rem] px-[16px] rounded-[6px] w-full h-[53px] border border-[#E5E5E5] placeholder:text-[#999999] placeholder:text-[1.4rem] placeholder:font-[Pretendard-Medium]"
+                type="text"
+                placeholder="공백 포함 8글자까지 가능해요"
+                onChange={(e) => setNickname(e.target.value)}
+              />
+              <button
+                className="font-[Pretendard-Medium] text-[1.4rem] rounded-[6px] w-[118px] h-[53px] disabled:bg-[#E5E5E5] disabled:text-[#999999] bg-[#41C364] text-white"
+                disabled={!nickname}
+                onClick={handleDuplicatedNickname}
+              >
+                중복 확인
+              </button>
+            </div>
             <div className="flex flex-col gap-[10px]">
               <div className="flex items-center gap-[8px]">
                 <div className="flex justify-center items-center bg-[#41C364] w-[24px] h-[24px] rounded-full">
@@ -119,7 +134,8 @@ export default function Signup() {
             !id.trim() ||
             !password.trim() ||
             !nickname.trim() ||
-            isDuplicated ||
+            isDuplicatedId ||
+            isDuplicatedNickname ||
             !checkPassword()
           }
         >

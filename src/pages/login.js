@@ -1,4 +1,4 @@
-import useUserInfo from "@hooks/useUserInfo";
+import useUserInfo from "../hooks/useUserInfo";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { useState } from "react";
@@ -18,7 +18,7 @@ export default function Login() {
       //   });
       //   setUserInfo(userInfo);
       setUserInfo(loginData);
-      router.push("/home");
+      router.push("/mainHome");
     } catch (e) {
       alert("로그인에 실패하였습니다");
     }
