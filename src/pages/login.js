@@ -1,4 +1,4 @@
-import useUserInfo from "@hooks/useUserInfo";
+import useUserInfo from "../hooks/useUserInfo";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { useState } from "react";
