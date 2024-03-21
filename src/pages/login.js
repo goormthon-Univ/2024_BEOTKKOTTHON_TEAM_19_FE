@@ -18,7 +18,7 @@ export default function Login() {
       //   });
       //   setUserInfo(userInfo);
       setUserInfo(loginData);
-      router.push("/home");
+      router.push("/mainHome");
     } catch (e) {
       alert("로그인에 실패하였습니다");
     }
