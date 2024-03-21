@@ -17,9 +17,17 @@
 
 .supportText {
   margin-top: 125px;
+  margin-bottom: 100px;
   text-align: center;
   font-size: 24px;
   font-weight: 700;
   line-height: 140%;
   color: black;
+}
+
+.homeBtn {
+  position: absolute;
+  bottom: 50px;
+  left: 50%;
+  transform: translate(-50%, -50%);
 }
