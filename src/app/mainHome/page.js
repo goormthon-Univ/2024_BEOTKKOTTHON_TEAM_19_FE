@@ -21,7 +21,7 @@ export default function Home() {
   // })
 
   return (
-    <div>
+    <div className="h-[100vh]">
       <p className={classes.userGarden}>{userInfo.username || "User"}의 정원</p>
       {/* <p>(내 정원) 공유하기</p> */}
       <p className={classes.growRecord}>성장 과정</p>
