@@ -17,8 +17,8 @@ const nextConfig = {
   async rewrites() {
     return [
       {
-        source: "/api/:path", // API 요청을 위한 경로
-        destination: `${API_KEY}/api/:path`, // 올바른 동적 경로 매개변수 사용
+        source: "/api/:path*", // API 요청을 위한 경로
+        destination: `${API_KEY}/api/:path*`, // 올바른 동적 경로 매개변수 사용
       },
     ];
   },
