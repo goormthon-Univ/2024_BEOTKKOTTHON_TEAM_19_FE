@@ -21,7 +21,9 @@ export default function HabitDetailPage() {
       </div>
       <p className={classes.certificationText}>인증글</p>
       {certificationNumber.map((number, index) => {
-        return <CertificationComponent key={index}/>
+        return (<div className={classes.certificationContainer}>
+          <CertificationComponent key={index}/>
+        </div>)
       })}
       <div className={classes.addBtn}>
         <Image src="/image/addBtn.png" alt="addBtn img" width={15} height={15} />
