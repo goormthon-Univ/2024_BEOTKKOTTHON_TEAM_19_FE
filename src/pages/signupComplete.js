@@ -3,7 +3,7 @@ import Link from "next/link";
 export default function SignupComplete() {
   return (
     <div className="flex flex-col justify-between items-center gap-[20px] p-[20px] h-[100vh]">
-      <span className="font-[Pretendard-Bold] text-[2.4rem] text-center">
+      <span className="font-[Pretendard-Bold] text-[2.4rem] text-center py-[80px]">
         취향 소나무님,
         <br /> 가입을 축하드려요
       </span>
