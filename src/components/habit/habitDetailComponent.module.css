@@ -30,6 +30,10 @@
   display: flex;
   align-items: center;
   gap: 6px;
+
+  @media (max-height: 800px) {
+    margin-top: 25px;
+  }
 }
 
 .levelBox {

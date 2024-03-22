@@ -5,11 +5,11 @@ import LevelProgressBar from "../progressbar/progresBar";
 import { useState } from "react";
 
 
-export default function HabitDetailComponent() {
+
+export default function HabitDetailComponent({textNumber}) {
   const {userInfo} = useUserInfo();
   const [habit, setHabit] = useState("Temporary Text");
   const [level, setLevel] = useState(1);
-  const [textNumber, setTextNumber] = useState(0);
   const levelText = ["흙에 씨앗을 심었어요"];
 
   return (
