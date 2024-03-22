@@ -1,45 +1,38 @@
 .userGarden {
-  margin-left: 20px;
-  margin-top: 21px;
   font-size: 24px;
   font-weight: 700;
   color: black;
 }
 
 .growRecord {
-  margin-top: 60px;
-  margin-left: 20px;
   font-weight: 700;
   color: black;
 }
 
 .currentBox {
-  margin: 20px 20px 0 20px;
   display: flex;
   justify-content: space-between;
-  gap: 13px;
+  gap: 18px;
 }
 
 .habitBox {
-  margin-top: 24px;
   width: 100%;
-  height: 100vh;
-  background-color: #EBFAEF;
-  padding-left: 20px;
+  background-color: #ebfaef;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
 }
 
 .habitText {
-  padding-top: 20px;
   font-size: 18px;
   color: black;
   font-weight: 700;
-  margin-bottom: 20px;
 }
 
 .habitContainer {
-  display: flex;
-  padding-right: 20px;
-  justify-content: space-between;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 18px;
 }
 
 .navContainer {
