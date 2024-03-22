@@ -1,0 +1,25 @@
+.progressContainer {
+  margin-top: 12px;
+  display: flex;
+  gap: 2px;
+  width: 90%;
+  justify-content: center;
+}
+
+.level {
+  width: 10%;
+  height: 16px;
+  background-color: #E5E5E5;
+}
+
+.level1 {
+  border-radius: 10px 0 0 10px;
+}
+
+.level7 {
+  border-radius: 0 10px 10px 0;
+}
+
+.filled {
+  background-color: #41C364;
+}

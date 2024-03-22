@@ -1,0 +1,48 @@
+.componentContainer {
+  width: 90%;
+  height: 90%;
+  background-color: white;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.habitText {
+  font-size: 24px;
+  font-weight: 700;
+  line-height: 150%;
+  text-align: center;
+  margin-top: 25px;
+}
+.habitText span {
+  font-weight: 400;
+}
+
+.temporaryBox {
+  width: 100px;
+  height: 100px;
+  background-color: gray;
+  margin-top: 29px;
+}
+
+.levelContainer {
+  margin-top: 44px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.levelBox {
+  border: 1px solid #999999;
+  border-radius: 5px;
+  padding: 1px 8px;
+}
+.levelBox p {
+  font-size: 12px;
+  font-weight: 500;
+}
+
+.levelText {
+  font-size: 12px;
+  font-weight: 500;
+}
