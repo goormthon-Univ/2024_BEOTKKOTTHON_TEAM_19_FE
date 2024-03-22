@@ -130,13 +130,13 @@ export default function Signup() {
           <div className="flex flex-col gap-[12px]">
             <input
               className="text-[1.6rem] px-[16px] rounded-[6px] w-full h-[53px] border border-[#E5E5E5] placeholder:text-[#999999] placeholder:text-[1.4rem] placeholder:font-[Pretendard-Medium]"
-              type="text"
+              type="password"
               placeholder="문자, 숫자, 특수문자를 포함한 8자~20자"
               onChange={(e) => setPassword(e.target.value)}
             />
             <input
               className="text-[1.6rem] px-[16px] rounded-[6px] w-full h-[53px] border border-[#E5E5E5] placeholder:text-[#999999] placeholder:text-[1.4rem] placeholder:font-[Pretendard-Medium]"
-              type="text"
+              type="password"
               placeholder="비밀번호 확인"
               onChange={(e) => setPasswordCheck(e.target.value)}
             />
