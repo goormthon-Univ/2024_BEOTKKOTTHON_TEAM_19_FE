@@ -1,17 +1,31 @@
+import { useRouter } from "next/router";
 import { useState } from "react";
+import useUserInfo from "../hooks/useUserInfo";
 
 export default function Signup() {
+  const { setUserInfo } = useUserInfo();
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [passwordCheck, setPasswordCheck] = useState("");
   const [nickname, setNickname] = useState("");
   const [isDuplicatedUsername, setIsDuplicatedUsername] = useState(true);
   const [isDuplicatedNickname, setIsDuplicatedNickname] = useState(true);
+  const router = useRouter();
+
+  const onChangeUsername = (e) => {
+    setUsername(e.target.value);
+    setIsDuplicatedUsername(true);
+  };
+
+  const onChangeNickname = (e) => {
+    setNickname(e.target.value);
+    setIsDuplicatedNickname(true);
+  };
 
   const handleDuplicatedUsername = async () => {
     const postData = { username };
     try {
-      const res = await fetch("/api/check-username", {
+      const res = await fetch("/api/users/check-username", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -33,7 +47,7 @@ export default function Signup() {
   const handleDuplicatedNickname = async () => {
     const postData = { nickname };
     try {
-      const res = await fetch("/api/check-nickname", {
+      const res = await fetch("/api/users/check-nickname", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -63,16 +77,16 @@ export default function Signup() {
     }
     const postData = { username, password, nickname };
     try {
-      const res = await fetch("/api/signup", {
+      const res = await fetch("/api/users/signup", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
         body: JSON.stringify(postData),
       });
-      const { status, data } = await res.json();
+      const { status, data, message } = await res.json();
       if (status === "fail") {
-        alert(data.password);
+        alert(message);
         return;
       }
       const { accessToken, refreshToken, loginResponseDTO } = data;
@@ -104,11 +118,11 @@ export default function Signup() {
               className="text-[1.6rem] px-[16px] rounded-[6px] w-full h-[53px] border border-[#E5E5E5] placeholder:text-[#999999] placeholder:text-[1.4rem] placeholder:font-[Pretendard-Medium]"
               type="text"
               placeholder="6자~20자까지 가능해요"
-              onChange={(e) => setUsername(e.target.value)}
+              onChange={onChangeUsername}
             />
             <button
               className="font-[Pretendard-Medium] text-[1.4rem] rounded-[6px] w-[118px] h-[53px] disabled:bg-[#E5E5E5] disabled:text-[#999999] bg-[#41C364] text-white"
-              disabled={!username}
+              disabled={!username || !isDuplicatedUsername}
               onClick={handleDuplicatedUsername}
             >
               중복 확인
@@ -160,11 +174,11 @@ export default function Signup() {
                 className="text-[1.6rem] px-[16px] rounded-[6px] w-full h-[53px] border border-[#E5E5E5] placeholder:text-[#999999] placeholder:text-[1.4rem] placeholder:font-[Pretendard-Medium]"
                 type="text"
                 placeholder="공백 포함 8글자까지 가능해요"
-                onChange={(e) => setNickname(e.target.value)}
+                onChange={onChangeNickname}
               />
               <button
                 className="font-[Pretendard-Medium] text-[1.4rem] rounded-[6px] w-[118px] h-[53px] disabled:bg-[#E5E5E5] disabled:text-[#999999] bg-[#41C364] text-white"
-                disabled={!nickname}
+                disabled={!nickname || !isDuplicatedNickname}
                 onClick={handleDuplicatedNickname}
               >
                 중복 확인
