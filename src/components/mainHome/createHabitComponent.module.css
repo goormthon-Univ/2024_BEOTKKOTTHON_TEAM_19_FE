@@ -5,9 +5,10 @@
   justify-content: center;
   align-items: center;
   background-color: white;
+  border-radius: 5px;
 
-  @media (max-width: 390px) {
+  /* @media (max-width: 390px) {
     width: 150px;
     height: 190px;
-  }
+  } */
 }
