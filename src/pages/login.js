@@ -43,6 +43,7 @@ export default function Login() {
           className="mb-[14.77px]"
           alt="로고"
           src={require("../../public/image/logo.svg")}
+          priority
         />
         <span className="font-[Pretendard-Medium] text-[1.4rem] text-[#333333]">
           꾸준한 습관 기르기
