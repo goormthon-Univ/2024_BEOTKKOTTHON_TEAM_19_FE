@@ -13,7 +13,7 @@ export default function Login() {
   const handleLogin = async () => {
     const postData = { username, password };
     try {
-      const res = await fetch("/api/login", {
+      const res = await fetch("/api/users/login", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -60,7 +60,7 @@ export default function Login() {
           />
           <input
             className="text-[1.6rem] placeholder:text-[#999999] placeholder:text-[1.4rem] placeholder:font-[Pretendard-Medium] py-[8.5px] px-[17px] border-b border-b-[#E5E5E5]"
-            type="text"
+            type="password"
             placeholder="비밀번호"
             onChange={(e) => setPassword(e.target.value)}
           />
