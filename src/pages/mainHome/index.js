@@ -61,8 +61,8 @@ export default function Home() {
   }, [accessToken]);
 
   const handleShare = () => {
-    // const shareUrl = `https://want-habit.vercel.app/shareTree/${id}`
-    const shareUrl = `http://localhost:3000/shareTree?id=${id}`;
+    const shareUrl = `https://want-habit.vercel.app/shareTree?id=${id}`;
+    // const shareUrl = `http://localhost:3000/shareTree?id=${id}`;
     console.log(shareUrl);
     copyToClipBoard(shareUrl);
   };
