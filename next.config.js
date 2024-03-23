@@ -18,7 +18,7 @@ const nextConfig = {
     remotePatterns: [
       {
         protocol: "https",
-        hostname: "via.placeholder.com",
+        hostname: "team19-bucket.s3.ap-northeast-2.amazonaws.com",
       },
     ],
   },
