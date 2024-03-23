@@ -103,7 +103,7 @@ export default function HabitDetailPage() {
 
   return (
     <>
-      <CreateCertificationModal ref={dialog}/>
+      <CreateCertificationModal ref={dialog} habitId={habitId}/>
       <div className={classes.bodyContainer}>
         <div className={classes.topContainer}>
           <HabitDetailComponent totalNum={total} habitText={data.habitName} url={data.imageUrl} level={data.treeLevel}/>
