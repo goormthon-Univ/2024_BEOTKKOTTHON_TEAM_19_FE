@@ -10,6 +10,7 @@ import Link from "next/link";
 import axios from "axios";
 import { useRouter } from "next/router";
 import Image from "next/image";
+import Encourage from "../../components/encourage";
 
 export default function Home() {
   const [count, setCount] = useState(0);
@@ -22,15 +23,16 @@ export default function Home() {
   const [level, setLevet] = useState(0);
   // const [user, setUser] = useState("User");
   const { userInfo } = useUserInfo();
+  const { feedback, treeId } = userInfo;
   const router = useRouter();
-
+  console.log(feedback, treeId);
   const {
     userInfo: { accessToken },
   } = useUserInfo();
 
   const handleShowHabitDetail = (habitId) => {
     router.push(`/habitDetail?habitId=${habitId}`);
-  }
+  };
 
   // useEffect(() => {
   //   // 컴포넌트가 마운트될 때 한 번만 실행됩니다.
@@ -42,12 +44,9 @@ export default function Home() {
     console.log(`${accessToken}`);
     const handleGetHabit = async () => {
       try {
-        const response = await axios.get(
-          "/api/trees",
-          {
-            headers: { authorization: `Bearer ${accessToken}` },
-          }
-        );
+        const response = await axios.get("/api/trees", {
+          headers: { authorization: `Bearer ${accessToken}` },
+        });
         if (response.status === 200) {
           setHabit(response.data.data);
           console.log("불러오기 성공");
@@ -56,11 +55,10 @@ export default function Home() {
       } catch (error) {
         console.error(error);
       }
-    }
+    };
 
     handleGetHabit();
-  }, [accessToken])
-
+  }, [accessToken]);
 
   return (
     <div className="h-[100vh] bg-[#EBFAEF] overflow-y-auto">
@@ -71,7 +69,12 @@ export default function Home() {
           </p>
           <div className={classes.shareContainer}>
             <p className={classes.shareText}>공유하기</p>
-            <Image src="/image/share.svg" alt="shareImg" width={16} height={14} />
+            <Image
+              src="/image/share.svg"
+              alt="shareImg"
+              width={16}
+              height={14}
+            />
           </div>
         </div>
         <div className="flex flex-col gap-[20px]">
@@ -88,7 +91,17 @@ export default function Home() {
           <p className={classes.habitText}>성장 중인 나무 {habit.length}그루</p>
           <div className={classes.habitContainer}>
             {habit.map((data, index) => {
-              return <HabitComponent onClick={() => handleShowHabitDetail(data.treeId)} key={index} treeId={data.treeId} habitText={data.habitName} level={data.treeLevel} url={data.treeImageUrl} day={data.continuousPeriod} />
+              return (
+                <HabitComponent
+                  onClick={() => handleShowHabitDetail(data.treeId)}
+                  key={index}
+                  treeId={data.treeId}
+                  habitText={data.habitName}
+                  level={data.treeLevel}
+                  url={data.treeImageUrl}
+                  day={data.continuousPeriod}
+                />
+              );
             })}
             <Link className="w-full" href="/createHabit">
               <CreateHabitComponent />
@@ -97,6 +110,7 @@ export default function Home() {
         </div>
       </div>
       <NavBar />
+      {feedback && <Encourage treeId={treeId} />}
     </div>
   );
 }
