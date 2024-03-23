@@ -1,23 +1,37 @@
 .createModal {
   min-width: 350px;
   max-width: 450px;
+  height: 350px;
 }
 
 .topContainer {
+  padding: 11px 13px 11px 13px;
   display: flex;
-  padding: 10px 15px 10px 15px;
   justify-content: space-between;
   align-items: center;
 }
 
-.writeText {
+.habitText {
   font-size: 14px;
   font-weight: 700;
+  color: black;
+}
+
+.imgContainer {
+  position: relative;
+  border-radius: 5px;
+  margin: 12px;
+  height: 110px;
+  background-color: #E5E5E5;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .inputField {
   outline: none;
   resize: none;
+  width: 100%;
   padding-top: 10px;
   padding-left: 15px;
 }
@@ -34,4 +48,36 @@
   padding-bottom: 10px;
   padding-left: 15px;
   color: #999999;
+}
+
+.submitBox {
+  border-radius: 5px;
+  margin: 12px;
+  height: 53px;
+  background-color: #E5E5E5;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.submitText {
+  color: #999999;
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.activeBox {
+  border-radius: 5px;
+  margin: 12px;
+  height: 53px;
+  background-color: #41C364;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.activeText {
+  color: white;
+  font-size: 14px;
+  font-weight: 700;
 }

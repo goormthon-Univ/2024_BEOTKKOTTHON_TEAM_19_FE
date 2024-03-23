@@ -31,6 +31,7 @@ export default function HabitDetailPage() {
           <HabitDetailComponent textNumber={textNumber} />
         </div>
         <p className={classes.certificationText}>인증글 총 {total}개</p>
+        <hr className="mt-5" />
         {certificationNumber.map((number, index) => {
           return (<div className={classes.certificationContainer} key={index}>
             <CertificationComponent />
