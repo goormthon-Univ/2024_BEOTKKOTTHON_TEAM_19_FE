@@ -45,8 +45,8 @@ export default function MyHistory() {
           <Image
             alt="인증샷"
             src={v.treePostImageUrl}
-            width={0}
-            height={0}
+            width={300}
+            height={300}
             className="w-full h-auto"
             priority
           />

@@ -91,7 +91,7 @@ export default function ShareTree() {
           <span className="font-[Pretendard-Bold]">{nickname}</span>님의 정원
         </span>
       </div>
-      {treeList.length ? (
+      {treeList && treeList.length ? (
         treeList.map((page, i) => (
           <div className="relative" key={i}>
             {i === 0 ? (
@@ -107,7 +107,9 @@ export default function ShareTree() {
                 src={require("../../public/image/road2.svg")}
               />
             )}
-            {page.map((page, i) => renderTree(page, i))}
+            {page && page.lenght
+              ? page.map((page, i) => renderTree(page, i))
+              : null}
           </div>
         ))
       ) : (
