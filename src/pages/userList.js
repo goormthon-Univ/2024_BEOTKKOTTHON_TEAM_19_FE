@@ -46,8 +46,27 @@ export default function UserList() {
     getTreeList();
   });
 
+  const deleteData = async () => {
+    try {
+      setLoading(true); // 데이터 요청 시작 시 로딩 상태 설정
+      const res = await axios
+        .delete("/api/users/redis-keys", {
+          headers: {
+            authorization: `Bearer ${accessToken}`,
+          },
+        })
+        .then((res) => res.data)
+        .then((res) => {});
+      console.log(res);
+    } finally {
+    }
+  };
+
   useEffect(() => {
     getTreeList();
+    return () => {
+      deleteData();
+    };
   }, []);
 
   const handleClickTree = (treeId) => {
