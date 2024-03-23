@@ -23,7 +23,7 @@ export default function Home() {
   const [level, setLevet] = useState(0);
   // const [user, setUser] = useState("User");
   const { userInfo } = useUserInfo();
-  const { feedback, treeId } = userInfo;
+  const { feedback, treeId, id } = userInfo;
   const router = useRouter();
   console.log(feedback, treeId);
   const {
@@ -60,6 +60,25 @@ export default function Home() {
     handleGetHabit();
   }, [accessToken]);
 
+  const handleShare = () => {
+    // const shareUrl = `https://want-habit.vercel.app/shareTree/${id}`
+    const shareUrl = `http://localhost:3000/shareTree?id=${id}`;
+    console.log(shareUrl);
+    copyToClipBoard(shareUrl);
+  };
+
+  function copyToClipBoard(shareUrl) {
+    navigator.clipboard
+      .writeText(shareUrl)
+      .then(() => {
+        console.log("Text copied to clipboard...");
+        alert(`${shareUrl} 주소가 복사되었습니다.`);
+      })
+      .catch((err) => {
+        console.log("Something went wrong", err);
+      });
+  }
+
   return (
     <div className="h-[100vh] bg-[#EBFAEF] overflow-y-auto">
       <div className="flex flex-col gap-[60px] pt-[21px] pb-[25px] px-[20px] bg-white">
@@ -68,7 +87,9 @@ export default function Home() {
             {userInfo.username || "User"}의 정원
           </p>
           <div className={classes.shareContainer}>
-            <p className={classes.shareText}>공유하기</p>
+            <div className="cursor-pointer" onClick={handleShare}>
+              <p className={classes.shareText}>공유하기</p>
+            </div>
             <Image
               src="/image/share.svg"
               alt="shareImg"
