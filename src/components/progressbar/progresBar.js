@@ -1,18 +1,18 @@
 import classes from "./progressBar.module.css";
 
-export default function LevelProgressBar({textNumber}) {
+export default function LevelProgressBar({totalNum}) {
   const levels = [1,2,3,4,5,6];
   const levelNumber = ["0개", "1개", "3개", "10개", "30개", "50개", "100개"];
 
-  const filledLevels = calculateFilledLevel(textNumber);
+  const filledLevels = calculateFilledLevel(totalNum);
 
-  function calculateFilledLevel(textNumber) {
-    if(textNumber >= 100) return 6;
-    if(textNumber >= 50) return 5;
-    if(textNumber >= 30) return 4;
-    if(textNumber >= 10) return 3;
-    if(textNumber >= 3) return 2;
-    if(textNumber >= 1) return 1;
+  function calculateFilledLevel(totalNum) {
+    if(totalNum >= 100) return 6;
+    if(totalNum >= 50) return 5;
+    if(totalNum >= 30) return 4;
+    if(totalNum >= 10) return 3;
+    if(totalNum >= 3) return 2;
+    if(totalNum >= 1) return 1;
     return 0;
   }
   
