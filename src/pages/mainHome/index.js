@@ -16,6 +16,10 @@ export default function Home() {
   const [days, setDays] = useState(0);
   const [habit, setHabit] = useState([]);
   const [tree, setTree] = useState(0);
+  const [dayDiff, setDayDiff] = useState(0);
+  const [imgUrl, setImgUrl] = useState("");
+  const [habitText, setHabitText] = useState("");
+  const [level, setLevet] = useState(0);
   // const [user, setUser] = useState("User");
   const { userInfo } = useUserInfo();
   const router = useRouter();
@@ -24,8 +28,8 @@ export default function Home() {
     userInfo: { accessToken },
   } = useUserInfo();
 
-  const handleShowHabitDetail = () => {
-    router.push("/habitDetail");
+  const handleShowHabitDetail = (habitId) => {
+    router.push(`/habitDetail?habitId=${habitId}`);
   }
 
   // useEffect(() => {
@@ -44,10 +48,9 @@ export default function Home() {
             headers: { authorization: `Bearer ${accessToken}` },
           }
         );
-        if (response.status === 200 && response.data.length) {
-          setHabit(prevHabits => [...prevHabits, response.data]);
+        if (response.status === 200) {
+          setHabit(response.data.data);
           console.log("불러오기 성공");
-          console.log(habit.length);
           console.log(response.data);
         }
       } catch (error) {
@@ -62,7 +65,7 @@ export default function Home() {
   return (
     <div className="h-[100vh] bg-[#EBFAEF] overflow-y-auto">
       <div className="flex flex-col gap-[60px] pt-[21px] pb-[25px] px-[20px] bg-white">
-        <div className="flex justify-between">
+        <div className="flex justify-between relative">
           <p className={classes.userGarden}>
             {userInfo.username || "User"}의 정원
           </p>
@@ -82,10 +85,10 @@ export default function Home() {
 
       <div className="pt-[17px] pb-[100px] px-[20px]">
         <div className={classes.habitBox}>
-          <p className={classes.habitText}>성장 중인 나무 {tree}그루</p>
+          <p className={classes.habitText}>성장 중인 나무 {habit.length}그루</p>
           <div className={classes.habitContainer}>
             {habit.map((data, index) => {
-              return <HabitComponent onClick={handleShowHabitDetail} key={index} />
+              return <HabitComponent onClick={() => handleShowHabitDetail(data.treeId)} key={index} treeId={data.treeId} habitText={data.habitName} level={data.treeLevel} url={data.treeImageUrl} day={data.continuousPeriod} />
             })}
             <Link className="w-full" href="/createHabit">
               <CreateHabitComponent />

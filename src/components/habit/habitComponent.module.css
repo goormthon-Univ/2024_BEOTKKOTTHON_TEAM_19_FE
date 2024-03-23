@@ -28,10 +28,7 @@
   align-items: center;
 }
 
-.temporaryBox {
-  width: 100px;
-  height: 90px;
-  background-color: gray;
+.imgBox {
   margin-top: 15px;
 }
 
