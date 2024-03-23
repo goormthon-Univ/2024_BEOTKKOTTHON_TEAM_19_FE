@@ -12,7 +12,7 @@ import axios from "axios";
 export default function Home() {
   const [count, setCount] = useState(0);
   const [days, setDays] = useState(0);
-  const [habit, setHabit] = useState(["1", "2"]);
+  const [habit, setHabit] = useState([]);
   const [tree, setTree] = useState(0);
   // const [user, setUser] = useState("User");
   const { userInfo } = useUserInfo();
@@ -26,14 +26,15 @@ export default function Home() {
     const handleGetHabit = async () => {
       try {
         const response = await axios.get(
-          "/api/trees/",
+          "/api/trees",
           {
-            headers: { authorization: `Bearer ${accessToken}` },
+            headers: { authorization: `${accessToken}` },
           }
         );
         if (response.status === 200) {
           setHabit(response.data);
           console.log("불러오기 성공");
+          console.log(response.data);
         }
       } catch (error) {
         console.error(error);
