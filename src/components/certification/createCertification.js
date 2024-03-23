@@ -34,6 +34,9 @@ const CreateCertificationModal = forwardRef(function CreateCertificationModal(
   };
 
   const handleUserImg = (file) => {
+    if(!file) {
+      return;
+    }
     const reader = new FileReader();
     reader.onload = () => {
       setImg(reader.result);
