@@ -1,12 +1,17 @@
 import Image from "next/image";
 import Link from "next/link";
+import useUserInfo from "../hooks/useUserInfo";
 
 export default function SignupComplete() {
+  const {
+    userInfo: { username },
+  } = useUserInfo();
+
   return (
     <div className="flex flex-col justify-between items-center gap-[20px] p-[20px] h-[100vh]">
       <div className="flex flex-col items-center justify-between">
         <span className="text-[2.4rem] text-center pt-[80px]">
-          <span className="font-[Pretendard-Bold]">취향 소나무</span>님,
+          <span className="font-[Pretendard-Bold]">{username}</span>님,
           <br /> 가입을 축하드려요
         </span>
         <Image
