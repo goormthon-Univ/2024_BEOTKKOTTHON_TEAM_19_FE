@@ -7,6 +7,11 @@ import { resolve } from "styled-jsx/css";
 const CreateCertificationModal =  forwardRef(function CreateCertificationModal(props, ref) {
   const handleCloseModal = () => {
     ref.current.close();
+    setImg("");
+    setUserText("");
+    if(imgUpload.current) {
+      imgUpload.current.value = "";
+    }
   }
 
   const imgUpload = useRef();

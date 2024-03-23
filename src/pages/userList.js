@@ -13,6 +13,7 @@ export default function UserList() {
   const [treeList, setTreeList] = useState([]);
   const [fetchingData, setFetchingData] = useState([]);
   const [loading, setLoading] = useState(false);
+  // const [isEnd, setIsEnd] = useState(false);
 
   const getTreeList = useCallback(async () => {
     if (loading) return; // 이미 로딩 중이면 중복 호출 방지
@@ -30,6 +31,7 @@ export default function UserList() {
       }
       if (data.length === 0) {
         setIsEnd(true);
+        return;
       }
       setTreeList((prev) => [...prev, ...data]);
       setFetchingData(data);
