@@ -17,8 +17,8 @@ const nextConfig = {
   images: {
     remotePatterns: [
       {
-        protocol: "https",
-        hostname: "team19-bucket.s3.ap-northeast-2.amazonaws.com",
+        protocol: 'https', // 여기서는 프로토콜을 https로 지정
+        hostname: 'team19-bucket.s3.ap-northeast-2.amazonaws.com', // 추가하려는 호스트 이름
       },
     ],
   },
@@ -33,3 +33,5 @@ const nextConfig = {
 };
 
 module.exports = withPWA(nextConfig);
+
+
