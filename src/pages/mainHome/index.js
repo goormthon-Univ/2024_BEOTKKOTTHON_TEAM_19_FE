@@ -8,6 +8,7 @@ import HabitComponent from "../../components/habit/habitComponent";
 import useUserInfo from "../../hooks/useUserInfo";
 import Link from "next/link";
 import axios from "axios";
+import { useRouter } from "next/router";
 
 export default function Home() {
   const [count, setCount] = useState(0);
@@ -16,10 +17,21 @@ export default function Home() {
   const [tree, setTree] = useState(0);
   // const [user, setUser] = useState("User");
   const { userInfo } = useUserInfo();
+  const router = useRouter();
 
   const {
     userInfo: { accessToken },
   } = useUserInfo();
+
+  const handleShowHabitDetail = () => {
+    router.push("/habitDetail");
+  }
+
+  // useEffect(() => {
+  //   // 컴포넌트가 마운트될 때 한 번만 실행됩니다.
+  //   setHabit([{ "id": 1, "name": "매일 아침 조깅하기", "progress": 70 }]);
+  //   // 다른 로직이나 API 호출 등을 여기에 추가할 수 있습니다.
+  // }, []);
 
   useEffect(() => {
     console.log(`${accessToken}`);
@@ -28,12 +40,13 @@ export default function Home() {
         const response = await axios.get(
           "/api/trees",
           {
-            headers: { authorization: `${accessToken}` },
+            headers: { authorization: `Bearer ${accessToken}` },
           }
         );
-        if (response.status === 200) {
-          setHabit(response.data);
+        if (response.status === 200 && response.data.length) {
+          setHabit(prevHabits => [...prevHabits, response.data]);
           console.log("불러오기 성공");
+          console.log(habit.length);
           console.log(response.data);
         }
       } catch (error) {
@@ -42,7 +55,7 @@ export default function Home() {
     }
 
     handleGetHabit();
-  })
+  }, [accessToken])
 
 
   return (
@@ -68,9 +81,7 @@ export default function Home() {
           <p className={classes.habitText}>성장 중인 나무 {tree}그루</p>
           <div className={classes.habitContainer}>
             {habit.map((data, index) => {
-              return <Link href={`/mainHome/${index}`} key={index}>
-                <HabitComponent />
-            </Link>
+              return <HabitComponent onClick={handleShowHabitDetail} key={index} />
             })}
             <Link className="w-full" href="/createHabit">
               <CreateHabitComponent />
