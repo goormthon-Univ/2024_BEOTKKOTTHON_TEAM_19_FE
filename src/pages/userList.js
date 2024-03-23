@@ -1,6 +1,6 @@
 "use client";
 import Image from "next/image";
-import { useCallback, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import useUserInfo from "../hooks/useUserInfo";
 import axios from "axios";
 import useIntersect from "../hooks/useIntersect";
@@ -33,20 +33,6 @@ export default function UserList() {
           }
         });
       console.log(res);
-
-      //   const { status, data, message } = res.data;
-      //   if (status === "fail") {
-      //     alert(message);
-      //     return;
-      //   }
-      //   if (treeList.length === 0) {
-      //     setTreeList([{ 0: data }]);
-      //   } else {
-      //     setTreeList((prev) => [...prev, { [prev.length]: data }]);
-      //   }
-      //   setIsLastPage(data.length === 0);
-      // } catch (e) {
-      //   console.error("Error fetching tree list:", e);
     } finally {
       setLoading(false); // 데이터 요청 완료 시 로딩 상태 제거
     }
@@ -63,6 +49,10 @@ export default function UserList() {
   useEffect(() => {
     getTreeList();
   }, []);
+
+  const handleClickTree = (treeId) => {
+    router.push({ pathname: "/userHistory", query: { treeId } });
+  };
 
   if (!treeList || treeList.length === 0) {
     return (
@@ -101,8 +91,17 @@ export default function UserList() {
           }}
           key={treeId}
         >
-          <Image alt="나무" src={treeImageUrl} width={100} height={100} />
-          <span>{nickname}</span>
+          <div
+            className="flex flex-col items-center gap-[10px] cursor-pointer"
+            onClick={() => handleClickTree(treeId)}
+          >
+            <Image alt="나무" src={treeImageUrl} width={100} height={100} />
+            <div className="flex justify-center items-center bg-[#0EAD39] rounded-[6px] py-[4px] px-[8px]">
+              <span className="text-white font-[Pretendard-Medium] text-[1.2rem]">
+                {nickname}
+              </span>
+            </div>
+          </div>
         </div>
       </div>
     );
