@@ -85,7 +85,7 @@ const CreateCertificationModal = forwardRef(function CreateCertificationModal(
         formData, // FormData 객체 전송
         {
           headers: {
-            'Content-Type': 'multipart/form-data', // 중요: multipart/form-data 유형 명시
+            // 'Content-Type': 'multipart/form-data', // 중요: multipart/form-data 유형 명시
             'Authorization': `Bearer ${accessToken}`, // 필요한 경우 토큰 추가
           },
         }
