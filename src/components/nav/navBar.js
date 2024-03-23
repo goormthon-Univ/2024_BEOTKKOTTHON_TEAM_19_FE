@@ -9,11 +9,11 @@ export default function NavBar() {
         <div className={classes.imgBox}>
           <Link
             href="/mainHome"
-            className="flex flex-col items-center px-[16px]"
+            className="flex flex-col items-center px-[16px] gap-[4px]"
           >
             <Image
-              src="/image/Home.png"
-              alt="Home icon"
+              src={require("../../../public/image/home.svg")}
+              alt="내 습관 보기"
               width={18}
               height={18}
             />
@@ -23,11 +23,11 @@ export default function NavBar() {
         <div className={classes.imgBox}>
           <Link
             href="/userList"
-            className="flex flex-col items-center px-[16px]"
+            className="flex flex-col items-center px-[16px] gap-[4px]"
           >
             <Image
-              src="/image/Home.png"
-              alt="Home icon"
+              src={require("../../../public/image/garden.svg")}
+              alt="다른 유저 습관 보기"
               width={18}
               height={18}
             />
@@ -37,11 +37,11 @@ export default function NavBar() {
         <div className={classes.imgBox}>
           <Link
             href="/myHistory"
-            className="flex flex-col items-center px-[16px]"
+            className="flex flex-col items-center px-[16px] gap-[4px]"
           >
             <Image
-              src="/image/Home.png"
-              alt="Home icon"
+              src={require("../../../public/image/history.svg")}
+              alt="내 인증글 보기"
               width={18}
               height={18}
             />
