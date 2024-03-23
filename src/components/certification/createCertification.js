@@ -25,6 +25,7 @@ const CreateCertificationModal = forwardRef(function CreateCertificationModal(
   const [userText, setUserText] = useState("");
   const [isActive, setIsActive] = useState(false);
   const [edit, setEdit] = useState(false);
+  const [imgFile, setImgFile] = useState(null);
 
   const {
     userInfo: { accessToken },
@@ -43,6 +44,7 @@ const CreateCertificationModal = forwardRef(function CreateCertificationModal(
     if(!file) {
       return;
     }
+    setImgFile(file);
     const reader = new FileReader();
     reader.onload = () => {
       setImg(reader.result);
@@ -71,8 +73,8 @@ const CreateCertificationModal = forwardRef(function CreateCertificationModal(
     
     // imgFile 상태가 파일 객체를 직접 가지고 있어야 합니다.
     // img 상태 대신 imgFile을 사용하여 파일을 저장하고 관리해야 합니다.
-    if(img) { // imgFile은 handleUserImg에서 설정한 파일 객체의 상태입니다.
-      formData.append("image", img); // "image"는 서버에서 파일을 참조하는 키입니다.
+    if(imgFile) { // imgFile은 handleUserImg에서 설정한 파일 객체의 상태입니다.
+      formData.append("image", imgFile); // "image"는 서버에서 파일을 참조하는 키입니다.
     }
     
     formData.append("userText", userText); // 사용자 텍스트 추가

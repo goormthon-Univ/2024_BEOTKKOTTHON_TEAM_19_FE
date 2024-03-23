@@ -14,7 +14,7 @@ export default function CertificationComponent({date, url, text}) {
       <hr />
       <div className={classes.certificationContainer}>
         <p className={classes.dateText}>{formattedDate}</p>
-        {/* <Image src={url} alt="userImg" width={100} height={100} className={userImg} /> */}
+        <div className={classes.imgBox}><Image src={url} alt="userImg" objectFit="fill" width={100} height={100} className={classes.userImg} /></div>
         <p className={classes.userText}>{text}</p>
       </div>
     </>
