@@ -1,8 +1,9 @@
 import axios from "axios";
 import Image from "next/image";
 import { useRef, useState } from "react";
-import SwiperCore, { Navigation, Scrollbar } from "swiper";
-import { Swiper, SwiperSlide } from "swiper/react";
+import Slider from "react-slick";
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
 
 export default function Encourage({ treeId, treePostImageUrls }) {
   const [isModalClosed, setIsModalClosed] = useState(false);
@@ -13,9 +14,21 @@ export default function Encourage({ treeId, treePostImageUrls }) {
   const handleAdjust = () => {
     setIsAdjustClicked(true);
   };
-
+  const images = [
+    "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS2zJqtWhOPWD2kh_Dps3C8_i6xEDuvGArE-g&usqp=CAU",
+    "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQY8ne_s7B5rSkXXbvoLLt5zaRMl98NG_b8fw&usqp=CAU",
+    "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRB7CoetS7cNz_e0PkRONkwr7d4b2Xkjkp1Fg&usqp=CAU",
+  ];
   const handleOkay = () => {
     setIsModalClosed(true);
+  };
+
+  var settings = {
+    dots: true,
+    infinite: false,
+    speed: 500,
+    slidesToShow: 1,
+    slidesToScroll: 1,
   };
 
   const handleClose = (e) => {
@@ -39,23 +52,6 @@ export default function Encourage({ treeId, treePostImageUrls }) {
     }
   };
 
-  SwiperCore.use([Navigation, Scrollbar]);
-  const swiperRef = useRef();
-  const breakpoints = {
-    768: {
-      slidesPerView: 1,
-      slidesPerGroup: 1,
-    },
-    1024: {
-      slidesPerView: 1,
-      slidesPerGroup: 1,
-    },
-    1200: {
-      slidesPerView: 1,
-      slidesPerGroup: 1,
-    },
-  };
-
   return (
     <div
       className={`absolute top-0 left-0 w-full h-full bg-black/50 flex justify-center items-center ${
@@ -71,30 +67,23 @@ export default function Encourage({ treeId, treePostImageUrls }) {
           지난 날의 습관을 되돌아봐요
         </p>
 
-        <Swiper
-          onSwiper={(swiper) => {
-            swiperRef.current = swiper;
-          }}
-          // pagination={{ clickable: true }}
-          navigation
-          breakpoints={breakpoints}
-          className="w-[174px] h-[174px]"
-        >
-          {treePostImageUrls?.map((image) => (
-            <SwiperSlide key={image.id}>
-              <Image
-                src={image.imgUrl}
-                alt={image.title}
-                width={174}
-                height={174}
-                priority
-              />
-            </SwiperSlide>
+        <Slider {...settings} className="w-[174px]">
+          {images.map((v) => (
+            <Image
+              key={v}
+              alt="인증샷"
+              src={v}
+              width={174}
+              height={174}
+              className="w-full h-auto"
+            />
           ))}
-        </Swiper>
+        </Slider>
 
         <div
-          className={`w-full flex gap-[12px] ${isAdjustClicked && "hidden"}`}
+          className={`w-full flex gap-[12px] pt-[20px] ${
+            isAdjustClicked && "hidden"
+          }`}
         >
           <button
             className="w-full disabled:bg-[#E5E5E5] disabled:text-[#999999] bg-[#41C364] text-white text-[1.4rem] font-[Pretendard-Bold] h-[53px] rounded-[6px]"
