@@ -21,8 +21,17 @@ export default function Login() {
         return;
       }
       const { accessToken, refreshToken, loginResponseDTO } = data;
-      const { id, username, nickname, feedback, treeId } = loginResponseDTO;
-      setUserInfo({ accessToken, id, username, nickname, feedback, treeId });
+      const { id, username, nickname, feedback, treeId, treePostImageUrls } =
+        loginResponseDTO;
+      setUserInfo({
+        accessToken,
+        id,
+        username,
+        nickname,
+        feedback,
+        treeId,
+        treePostImageUrls,
+      });
       localStorage.setItem("refreshToken", refreshToken);
       router.push("/mainHome");
     } catch (e) {
