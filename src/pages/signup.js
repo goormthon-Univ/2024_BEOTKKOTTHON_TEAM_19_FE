@@ -1,6 +1,7 @@
 import { useRouter } from "next/router";
 import { useState } from "react";
 import useUserInfo from "../hooks/useUserInfo";
+import axios from "axios";
 
 export default function Signup() {
   const { setUserInfo } = useUserInfo();
@@ -25,14 +26,8 @@ export default function Signup() {
   const handleDuplicatedUsername = async () => {
     const postData = { username };
     try {
-      const res = await fetch("/api/users/check-username", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(postData),
-      });
-      const { status, data } = await res.json();
+      const res = await axios.post("/api/users/check-username", postData);
+      const { status, data } = res.data;
       if (status === "fail") {
         alert(data.username);
         return;
@@ -40,21 +35,15 @@ export default function Signup() {
       alert(data);
       setIsDuplicatedUsername(false);
     } catch (e) {
-      alert("아이디 중복 확인에 실패하였습니다");
+      alert("아이디 중복 확인에 실패하였습니다.");
     }
   };
 
   const handleDuplicatedNickname = async () => {
     const postData = { nickname };
     try {
-      const res = await fetch("/api/users/check-nickname", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(postData),
-      });
-      const { status, data } = await res.json();
+      const res = await axios.post("/api/users/check-nickname", postData);
+      const { status, data } = res.data;
       if (status === "fail") {
         alert(data.nickname);
         return;
@@ -62,7 +51,7 @@ export default function Signup() {
       alert(data);
       setIsDuplicatedNickname(false);
     } catch (e) {
-      alert("닉네임 중복 확인에 실패하였습니다");
+      alert("닉네임 중복 확인에 실패하였습니다.");
     }
   };
 
@@ -72,19 +61,13 @@ export default function Signup() {
 
   const handleSignup = async () => {
     if (!checkPassword()) {
-      alert("비밀번호를 확인해 주세요");
+      alert("비밀번호를 확인해 주세요.");
       return;
     }
     const postData = { username, password, nickname };
     try {
-      const res = await fetch("/api/users/signup", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(postData),
-      });
-      const { status, data, message } = await res.json();
+      const res = await axios.post("/api/users/signup", postData);
+      const { status, data, message } = res.data;
       if (status === "fail") {
         alert(message);
         return;
@@ -95,7 +78,7 @@ export default function Signup() {
       localStorage.setItem("refreshToken", refreshToken);
       router.push("/signupComplete");
     } catch (e) {
-      // alert("회원가입에 실패하였습니다");
+      alert(e.response.data.message);
     }
   };
 
