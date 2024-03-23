@@ -7,18 +7,42 @@ import NavBar from "../../components/nav/navBar";
 import HabitComponent from "../../components/habit/habitComponent";
 import useUserInfo from "../../hooks/useUserInfo";
 import Link from "next/link";
+import axios from "axios";
 
 export default function Home() {
   const [count, setCount] = useState(0);
   const [days, setDays] = useState(0);
-  const [habit, setHabit] = useState([]);
+  const [habit, setHabit] = useState(["1", "2"]);
   const [tree, setTree] = useState(0);
   // const [user, setUser] = useState("User");
   const { userInfo } = useUserInfo();
 
-  // useEffect(() => {
-  //   setUser(userInfo.username)
-  // })
+  const {
+    userInfo: { accessToken },
+  } = useUserInfo();
+
+  useEffect(() => {
+    console.log(`${accessToken}`);
+    const handleGetHabit = async () => {
+      try {
+        const response = await axios.get(
+          "/api/trees/",
+          {
+            headers: { authorization: `Bearer ${accessToken}` },
+          }
+        );
+        if (response.status === 200) {
+          setHabit(response.data);
+          console.log("불러오기 성공");
+        }
+      } catch (error) {
+        console.error(error);
+      }
+    }
+
+    handleGetHabit();
+  })
+
 
   return (
     <div className="h-[100vh] bg-[#EBFAEF] overflow-y-auto">
@@ -42,10 +66,11 @@ export default function Home() {
         <div className={classes.habitBox}>
           <p className={classes.habitText}>성장 중인 나무 {tree}그루</p>
           <div className={classes.habitContainer}>
-            <HabitComponent />
-            <HabitComponent />
-            <HabitComponent />
-            <HabitComponent />
+            {habit.map((data, index) => {
+              return <Link href={`/mainHome/${index}`} key={index}>
+                <HabitComponent />
+            </Link>
+            })}
             <Link className="w-full" href="/createHabit">
               <CreateHabitComponent />
             </Link>
