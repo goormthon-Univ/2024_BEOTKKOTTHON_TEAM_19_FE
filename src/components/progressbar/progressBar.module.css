@@ -1,8 +1,14 @@
+.levelContainer {
+  display: flex;
+  flex-direction: column;
+  width: 90%;
+}
+
 .progressContainer {
   margin-top: 12px;
   display: flex;
   gap: 2px;
-  width: 90%;
+  /* width: 90%; */
   justify-content: center;
 }
 
@@ -16,10 +22,24 @@
   border-radius: 10px 0 0 10px;
 }
 
-.level7 {
+.level6 {
   border-radius: 0 10px 10px 0;
 }
 
 .filled {
   background-color: #41C364;
+}
+
+.numberContainer {
+  margin-top: 2px;
+  display: flex;
+  justify-content: center;
+  padding-left: 15px;
+  gap: 3px;
+}
+
+.totalText {
+  font-size: 10px;
+  font-weight: 500;
+  width: 10%;
 }

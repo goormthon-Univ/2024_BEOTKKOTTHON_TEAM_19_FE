@@ -11,6 +11,7 @@ import { useRef } from "react";
 export default function HabitDetailPage() {
   const [textNumber, setTextNumber] = useState(0);
   const [certificationNumber, setCertificationNumber] = useState([]);
+  const [total, setTotal] = useState(0);
   const [isModal, setIsModal] = useState(false);
   const dialog = useRef();
 
@@ -29,7 +30,7 @@ export default function HabitDetailPage() {
         <div className={classes.topContainer}>
           <HabitDetailComponent textNumber={textNumber} />
         </div>
-        <p className={classes.certificationText}>인증글</p>
+        <p className={classes.certificationText}>인증글 총 {total}개</p>
         {certificationNumber.map((number, index) => {
           return (<div className={classes.certificationContainer} key={index}>
             <CertificationComponent />
