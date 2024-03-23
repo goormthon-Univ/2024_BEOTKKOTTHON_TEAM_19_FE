@@ -1,12 +1,17 @@
+import axios from "axios";
+import Image from "next/image";
 import { useRef, useState } from "react";
+import SwiperCore, { Navigation, Scrollbar } from "swiper";
+import { Swiper, SwiperSlide } from "swiper/react";
 
-export default function Encourage({ treeId }) {
+export default function Encourage({ treeId, treePostImageUrls }) {
   const [isModalClosed, setIsModalClosed] = useState(false);
-  const [isAdjustClicked, setIdAdjustClicked] = useState(false);
+  const [isAdjustClicked, setIsAdjustClicked] = useState(false);
   const modal = useRef(null);
-
+  const [habitName, setHabitName] = useState("");
+  console.log(treeId, treePostImageUrls);
   const handleAdjust = () => {
-    setIdAdjustClicked(true);
+    setIsAdjustClicked(true);
   };
 
   const handleOkay = () => {
@@ -17,8 +22,38 @@ export default function Encourage({ treeId }) {
     if (e.target === modal.current) setIsModalClosed(true);
   };
 
-  const handleComplete = () => {
-    console.log("습관명 조정 완료", treeId);
+  const handleComplete = async () => {
+    try {
+      const res = await axios.patch(`/api/trees/${treeId}`, {
+        name: habitName,
+      });
+      const { status, data, message } = res.data;
+      if (status === "fail") {
+        alert(message);
+        return;
+      }
+      alert("목표 조정에 성공하였습니다!");
+      setIsModalClosed(true);
+    } catch (e) {
+      console.log(e);
+    }
+  };
+
+  SwiperCore.use([Navigation, Scrollbar]);
+  const swiperRef = useRef();
+  const breakpoints = {
+    768: {
+      slidesPerView: 1,
+      slidesPerGroup: 1,
+    },
+    1024: {
+      slidesPerView: 1,
+      slidesPerGroup: 1,
+    },
+    1200: {
+      slidesPerView: 1,
+      slidesPerGroup: 1,
+    },
   };
 
   return (
@@ -35,9 +70,28 @@ export default function Encourage({ treeId }) {
           <br />
           지난 날의 습관을 되돌아봐요
         </p>
-        <div className="w-[174px] h-[174px] bg-slate-200">
-          히스토리 보여주기
-        </div>
+
+        <Swiper
+          onSwiper={(swiper) => {
+            swiperRef.current = swiper;
+          }}
+          // pagination={{ clickable: true }}
+          navigation
+          breakpoints={breakpoints}
+          className="w-[174px] h-[174px]"
+        >
+          {treePostImageUrls?.map((image) => (
+            <SwiperSlide key={image.id}>
+              <Image
+                src={image.imgUrl}
+                alt={image.title}
+                width={174}
+                height={174}
+                priority
+              />
+            </SwiperSlide>
+          ))}
+        </Swiper>
 
         <div
           className={`w-full flex gap-[12px] ${isAdjustClicked && "hidden"}`}
@@ -65,6 +119,7 @@ export default function Encourage({ treeId }) {
             className="w-full h-[53px] px-[16px] border border-[#E5E5E5] rounded-[6px] placeholder:font-[Pretendard-Medium] placeholder:text-[1.4rem] placeholder:text-[#999999] text-[1.6rem]"
             type="text"
             placeholder="예시) 하루에 운동 1시간 → 하루에 운동 30분"
+            onChange={(e) => setHabitName(e.target.value)}
           />
           <button
             className="w-full disabled:bg-[#E5E5E5] disabled:text-[#999999] bg-[#41C364] text-white text-[1.4rem] font-[Pretendard-Bold] h-[53px] rounded-[6px]"

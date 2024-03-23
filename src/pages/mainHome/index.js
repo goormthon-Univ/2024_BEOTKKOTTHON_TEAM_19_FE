@@ -23,7 +23,7 @@ export default function Home() {
   const [level, setLevet] = useState(0);
   // const [user, setUser] = useState("User");
   const { userInfo } = useUserInfo();
-  const { feedback, treeId, id } = userInfo;
+  const { feedback, treeId, id, treePostImageUrls } = userInfo;
   const router = useRouter();
   console.log(feedback, treeId);
   const {
@@ -131,7 +131,9 @@ export default function Home() {
         </div>
       </div>
       <NavBar />
-      {feedback && <Encourage treeId={treeId} />}
+      {feedback && (
+        <Encourage treeId={treeId} treePostImageUrls={treePostImageUrls} />
+      )}
     </div>
   );
 }
