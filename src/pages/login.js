@@ -3,6 +3,7 @@ import useUserInfo from "../hooks/useUserInfo";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { useState } from "react";
+import axios from "axios";
 
 export default function Login() {
   const { setUserInfo } = useUserInfo();
@@ -13,15 +14,8 @@ export default function Login() {
   const handleLogin = async () => {
     const postData = { username, password };
     try {
-      const res = await fetch("/api/users/login", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          // authorization: `Bearer ${accessToken}`
-        },
-        body: JSON.stringify(postData),
-      });
-      const { status, data, message } = await res.json();
+      const res = await axios.post("/api/users/login", postData);
+      const { status, data, message } = res.data;
       if (status === "fail") {
         alert(message);
         return;
@@ -32,7 +26,7 @@ export default function Login() {
       localStorage.setItem("refreshToken", refreshToken);
       router.push("/mainHome");
     } catch (e) {
-      // alert("로그인에 실패하였습니다");
+      alert(e.response.data.message);
     }
   };
 
