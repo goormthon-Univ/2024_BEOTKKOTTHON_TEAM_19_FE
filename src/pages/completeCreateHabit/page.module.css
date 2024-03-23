@@ -1,3 +1,9 @@
+.closeImg {
+  position: absolute;
+  top: 21px;
+  right: 20px;
+}
+
 .completeText {
   margin-top: 85px;
   text-align: center;
@@ -7,27 +13,18 @@
   color: black;
 }
 
-.temporaryBox {
-  width: 150px;
-  height: 150px;
+.plantImg {
+  display: block;
   margin: 0 auto;
-  margin-top: 200px;
-  background-color: gray;
+  margin-top: 27px;
 }
 
 .supportText {
-  margin-top: 125px;
+  margin-top: 78px;
   margin-bottom: 100px;
   text-align: center;
   font-size: 24px;
   font-weight: 700;
   line-height: 140%;
   color: black;
-}
-
-.homeBtn {
-  position: absolute;
-  bottom: 50px;
-  left: 50%;
-  transform: translate(-50%, -50%);
 }

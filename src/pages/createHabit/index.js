@@ -34,7 +34,7 @@ export default function CreateHabitPage() {
       );
       if(response.status === 200) {
         console.log("작성 완료");
-        router.push("/mainHome");
+        router.push("/completeCreateHabit");
       }
     } catch (error) {
       console.error(error);
