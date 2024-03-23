@@ -4,6 +4,16 @@
   color: black;
 }
 
+.shareContainer {
+  position: absolute;
+  top: 21px;
+  right: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 3.75px;
+}
+
 .growRecord {
   font-weight: 700;
   color: black;

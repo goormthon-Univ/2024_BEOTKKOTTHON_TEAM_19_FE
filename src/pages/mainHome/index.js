@@ -9,6 +9,7 @@ import useUserInfo from "../../hooks/useUserInfo";
 import Link from "next/link";
 import axios from "axios";
 import { useRouter } from "next/router";
+import Image from "next/image";
 
 export default function Home() {
   const [count, setCount] = useState(0);
@@ -65,7 +66,10 @@ export default function Home() {
           <p className={classes.userGarden}>
             {userInfo.username || "User"}의 정원
           </p>
-          {/* <p>(내 정원) 공유하기</p> */}
+          <div className={classes.shareContainer}>
+            <p className={classes.shareText}>공유하기</p>
+            <Image src="/image/share.svg" alt="shareImg" width={16} height={14} />
+          </div>
         </div>
         <div className="flex flex-col gap-[20px]">
           <p className={classes.growRecord}>성장 과정</p>
