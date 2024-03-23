@@ -15,43 +15,62 @@ export default function UserList() {
   const [isLastPage, setIsLastPage] = useState(false);
   const router = useRouter();
 
-  const getTreeList = useCallback(async () => {
+  const getTreeList = async () => {
     try {
       setLoading(true); // 데이터 요청 시작 시 로딩 상태 설정
-      const res = await axios.get("/api/users/tree-list", {
-        headers: {
-          authorization: `Bearer ${accessToken}`,
-        },
-      });
-      const { status, data, message } = res.data;
-      if (status === "fail") {
-        alert(message);
-        return;
-      }
-      if (treeList.length === 0) {
-        setTreeList([{ 0: data }]);
-      } else {
-        setTreeList((prev) => [...prev, { [prev.length]: data }]);
-      }
-      setIsLastPage(data.length === 0);
-    } catch (e) {
-      console.error("Error fetching tree list:", e);
+      const res = await axios
+        .get("/api/users/tree-list", {
+          headers: {
+            authorization: `Bearer ${accessToken}`,
+          },
+        })
+        .then((res) => res.data)
+        .then((res) => {
+          if (res.data.length === 0) {
+            setIsLastPage(true);
+          } else {
+            setTreeList((prev) => [...prev, res.data]);
+          }
+        });
+      console.log(res);
+
+      //   const { status, data, message } = res.data;
+      //   if (status === "fail") {
+      //     alert(message);
+      //     return;
+      //   }
+      //   if (treeList.length === 0) {
+      //     setTreeList([{ 0: data }]);
+      //   } else {
+      //     setTreeList((prev) => [...prev, { [prev.length]: data }]);
+      //   }
+      //   setIsLastPage(data.length === 0);
+      // } catch (e) {
+      //   console.error("Error fetching tree list:", e);
     } finally {
       setLoading(false); // 데이터 요청 완료 시 로딩 상태 제거
     }
-  }, [accessToken]);
-  console.log(treeList);
+  };
+
   // useIntersect훅에 타겟 감지 시 실행해야할 콜백함수 전달
-  const ref = useIntersect((entry, observer) => {
+  const ref = useIntersect((entry, { threshold = 1 }) => {
     // 불러올 데이터가 더 이상 없는지 체크
-    console.log(isLastPage);
+
     if (loading || isLastPage) return;
     getTreeList();
   });
 
   useEffect(() => {
     getTreeList();
-  }, [accessToken]);
+  }, []);
+
+  if (!treeList || treeList.length === 0) {
+    return (
+      <div ref={ref} className="flex items-center justify-center h-[100vh]">
+        <div className="animate-spin rounded-full h-16 w-16 border-t-2 border-b-2 border-blue-500"></div>
+      </div>
+    );
+  }
 
   const getTreePosition = (i) => {
     let [y, x] = [0, 0];
@@ -70,24 +89,21 @@ export default function UserList() {
   };
 
   const renderTree = (page, i) => {
-    const trees = page[i];
-    console.log("trees", trees);
+    const { userId, treeId, nickname, treeImageUrl } = page;
 
     return (
       <div>
-        {trees.map((v, i) => (
-          <div
-            className="absolute z-10 -translate-x-1/2 -translate-y-1/2"
-            style={{
-              top: `${getTreePosition(i)[0]}%`,
-              left: `${getTreePosition(i)[1]}%`,
-            }}
-            key={v.treeId}
-          >
-            <Image alt="나무" src={v.treeImageUrl} width={100} height={100} />
-            <span>{v.nickname}</span>
-          </div>
-        ))}
+        <div
+          className="absolute z-10 -translate-x-1/2 -translate-y-1/2"
+          style={{
+            top: `${getTreePosition(i % 5)[0]}%`,
+            left: `${getTreePosition(i % 5)[1]}%`,
+          }}
+          key={treeId}
+        >
+          <Image alt="나무" src={treeImageUrl} width={100} height={100} />
+          <span>{nickname}</span>
+        </div>
       </div>
     );
   };
@@ -115,10 +131,19 @@ export default function UserList() {
               src={require("../../public/image/road2.svg")}
             />
           )}
-          {renderTree(page, i)}
+          {page.map((page, i) => renderTree(page, i))}
         </div>
       ))}
-      <div className="bg-red-400 h-[100px]" ref={ref} />
+      {/* {loading ? (
+        <div className="flex items-center justify-center h-[50px] bg-blue-200">
+          <div className="animate-spin rounded-full h-16 w-16 border-t-2 border-b-2 border-blue-500"></div>
+        </div>
+      ) : null} */}
+      <div className={`w-full flex justify-center`} ref={ref}>
+        {loading && (
+          <div className="animate-spin rounded-full h-16 w-16 border-t-2 border-b-2 border-blue-500"></div>
+        )}
+      </div>
     </div>
   );
 }
