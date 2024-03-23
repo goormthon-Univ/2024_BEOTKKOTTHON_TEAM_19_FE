@@ -1,6 +1,6 @@
 import { useRef, useState } from "react";
 
-export default function Encourage() {
+export default function Encourage({ treeId }) {
   const [isModalClosed, setIsModalClosed] = useState(false);
   const [isAdjustClicked, setIdAdjustClicked] = useState(false);
   const modal = useRef(null);
@@ -18,7 +18,7 @@ export default function Encourage() {
   };
 
   const handleComplete = () => {
-    console.log("습관명 조정 완료");
+    console.log("습관명 조정 완료", treeId);
   };
 
   return (
