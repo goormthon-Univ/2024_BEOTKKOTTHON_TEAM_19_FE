@@ -7,6 +7,7 @@ const defaultState = {
   nickname: "",
   feedback: false,
   treeId: null,
+  treePostImageUrls: [],
 };
 
 const useUserInfo = create((set) => ({

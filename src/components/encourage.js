@@ -1,24 +1,55 @@
+import axios from "axios";
+import Image from "next/image";
 import { useRef, useState } from "react";
+import Slider from "react-slick";
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
 
-export default function Encourage({ treeId }) {
+export default function Encourage({ treeId, treePostImageUrls }) {
   const [isModalClosed, setIsModalClosed] = useState(false);
-  const [isAdjustClicked, setIdAdjustClicked] = useState(false);
+  const [isAdjustClicked, setIsAdjustClicked] = useState(false);
   const modal = useRef(null);
-
+  const [habitName, setHabitName] = useState("");
+  console.log(treeId, treePostImageUrls);
   const handleAdjust = () => {
-    setIdAdjustClicked(true);
+    setIsAdjustClicked(true);
   };
-
+  const images = [
+    "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS2zJqtWhOPWD2kh_Dps3C8_i6xEDuvGArE-g&usqp=CAU",
+    "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQY8ne_s7B5rSkXXbvoLLt5zaRMl98NG_b8fw&usqp=CAU",
+    "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRB7CoetS7cNz_e0PkRONkwr7d4b2Xkjkp1Fg&usqp=CAU",
+  ];
   const handleOkay = () => {
     setIsModalClosed(true);
+  };
+
+  var settings = {
+    dots: true,
+    infinite: false,
+    speed: 500,
+    slidesToShow: 1,
+    slidesToScroll: 1,
   };
 
   const handleClose = (e) => {
     if (e.target === modal.current) setIsModalClosed(true);
   };
 
-  const handleComplete = () => {
-    console.log("습관명 조정 완료", treeId);
+  const handleComplete = async () => {
+    try {
+      const res = await axios.patch(`/api/trees/${treeId}`, {
+        name: habitName,
+      });
+      const { status, data, message } = res.data;
+      if (status === "fail") {
+        alert(message);
+        return;
+      }
+      alert("목표 조정에 성공하였습니다!");
+      setIsModalClosed(true);
+    } catch (e) {
+      console.log(e);
+    }
   };
 
   return (
@@ -35,12 +66,24 @@ export default function Encourage({ treeId }) {
           <br />
           지난 날의 습관을 되돌아봐요
         </p>
-        <div className="w-[174px] h-[174px] bg-slate-200">
-          히스토리 보여주기
-        </div>
+
+        <Slider {...settings} className="w-[174px]">
+          {images.map((v) => (
+            <Image
+              key={v}
+              alt="인증샷"
+              src={v}
+              width={174}
+              height={174}
+              className="w-full h-auto"
+            />
+          ))}
+        </Slider>
 
         <div
-          className={`w-full flex gap-[12px] ${isAdjustClicked && "hidden"}`}
+          className={`w-full flex gap-[12px] pt-[20px] ${
+            isAdjustClicked && "hidden"
+          }`}
         >
           <button
             className="w-full disabled:bg-[#E5E5E5] disabled:text-[#999999] bg-[#41C364] text-white text-[1.4rem] font-[Pretendard-Bold] h-[53px] rounded-[6px]"
@@ -65,6 +108,7 @@ export default function Encourage({ treeId }) {
             className="w-full h-[53px] px-[16px] border border-[#E5E5E5] rounded-[6px] placeholder:font-[Pretendard-Medium] placeholder:text-[1.4rem] placeholder:text-[#999999] text-[1.6rem]"
             type="text"
             placeholder="예시) 하루에 운동 1시간 → 하루에 운동 30분"
+            onChange={(e) => setHabitName(e.target.value)}
           />
           <button
             className="w-full disabled:bg-[#E5E5E5] disabled:text-[#999999] bg-[#41C364] text-white text-[1.4rem] font-[Pretendard-Bold] h-[53px] rounded-[6px]"
