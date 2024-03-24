@@ -13,8 +13,8 @@ import Image from "next/image";
 import Encourage from "../../components/encourage";
 
 export default function Home() {
-  const [count, setCount] = useState(0);
-  const [days, setDays] = useState(0);
+  const [count, setCount] = useState(400);
+  const [days, setDays] = useState(158);
   const [habit, setHabit] = useState([]);
   const [tree, setTree] = useState(0);
   const [dayDiff, setDayDiff] = useState(0);
