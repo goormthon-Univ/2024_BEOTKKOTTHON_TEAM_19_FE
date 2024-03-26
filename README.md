@@ -1,3 +1,4 @@
+![cover](https://github.com/salmonco/2024_BEOTKKOTTHON_TEAM_19_FE/assets/86469788/59890943-88be-4799-ae20-979be5fffe14)
 ## 프로젝트 소개
 
 ### 타겟(페르소나)
@@ -10,7 +11,10 @@
 ### 서비스 가치
 자신만의 정원을 가꾸고, 정원을 다른 사람들과 공유하면서 **함께 성장**한다
 
-## 사용 도구
+## 시스템 아키텍처
+![아키텍처](https://github.com/salmonco/2024_BEOTKKOTTHON_TEAM_19_FE/assets/86469788/2ed40617-dd40-4ea4-a0b3-c2ce719fcf8e)
+
+## FE 사용 도구
 | 도구 | 도입 이유 |
 |---|---|
 | Next.js | url 공유하기 기능이 있는 웹앱의 SEO를 위한 SSR을 지원 |
